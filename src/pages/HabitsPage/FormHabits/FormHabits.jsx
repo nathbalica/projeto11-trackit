@@ -42,6 +42,7 @@ export default function FormHabits({ formClose, formOpen }) {
                 console.log(res.data);
                 setHabitName("")
                 setSelectedDays([])
+                formClose();
             })
             .catch((error) => {
                 console.error("Erro ao cadastrar hábito:", error);
@@ -89,6 +90,7 @@ const Container = styled.div`
 `;
 
 const FormContainer = styled.form`
+    display: ${(props) => props.formOpen ? "initial" : "none"};
     width: 90%;
     height: 180px;
 
