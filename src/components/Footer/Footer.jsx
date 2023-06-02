@@ -13,11 +13,11 @@ export default function Footer(){
     }
 
     return (
-        <ContainerFooter>
-            <StyledLink to="/habitos">Hábitos</StyledLink>
+        <ContainerFooter  data-test="menu">
+            <StyledLink to="/habitos" data-test="habit-link" >Hábitos</StyledLink>
             <ContainerProgressBar>
                 <CircleProgressBar>
-                    <Link to="/hoje">
+                    <Link to="/hoje" data-test="today-link">
                         <CircularProgressbar 
                             value={60}
                             text={"Hoje"}
@@ -32,7 +32,7 @@ export default function Footer(){
                     </Link>
                 </CircleProgressBar>
             </ContainerProgressBar>
-            <StyledLink>Histórico</StyledLink>
+            <StyledLink data-test="history-link">Histórico</StyledLink>
         </ContainerFooter>
     )
 }

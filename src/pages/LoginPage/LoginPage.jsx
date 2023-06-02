@@ -57,6 +57,7 @@ export default function LoginPage() {
                     value={form.email}
                     required
                     disabled={isLoading}
+                    data-test="email-input"
                 />
                 <Input
                     placeholder="senha"
@@ -65,8 +66,9 @@ export default function LoginPage() {
                     value={form.password}
                     required
                     disabled={isLoading}
+                    data-test="password-input"
                 />
-                <ButtonStyled type="submit" disabled={isLoading}>
+                <ButtonStyled type="submit" disabled={isLoading} data-test="login-btn">
                     {isLoading 
                         ? (<ThreeDots 
                         height="80" 
@@ -81,7 +83,7 @@ export default function LoginPage() {
                         : ("Entrar")}
                 </ButtonStyled>
             </FormStyled>
-            <StyledLink to="/cadastro">Não tem uma conta? Cadastre-se!</StyledLink>
+            <StyledLink to="/cadastro" data-test="signup-link">Não tem uma conta? Cadastre-se!</StyledLink>
         </PageContainer>
     )
 }

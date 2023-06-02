@@ -5,7 +5,7 @@ export const ContainerHabits = styled.div `
     background-color: #F2F2F2;
     display: flex;
     width: 100%;
-    height: 100%;
+    min-height: 100vh;
     flex-direction: column;
     padding-top: 90px;
     padding-bottom: 120px;

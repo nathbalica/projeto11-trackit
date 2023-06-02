@@ -49,6 +49,7 @@ export default function RegisterPage() {
                     value={form.email}
                     required
                     disabled={isLoading}
+                    data-test="email-input"
                 />
                 <Input
                     placeholder="senha"
@@ -57,6 +58,7 @@ export default function RegisterPage() {
                     value={form.password}
                     required
                     disabled={isLoading}
+                    data-test="password-input"
                 />
                 <Input
                     placeholder="nome"
@@ -65,6 +67,7 @@ export default function RegisterPage() {
                     value={form.name}
                     required
                     disabled={isLoading}
+                    data-test="user-name-input"
                 />
                 <Input
                     placeholder="foto"
@@ -73,8 +76,9 @@ export default function RegisterPage() {
                     value={form.image}
                     required
                     disabled={isLoading}
+                    data-test="user-image-input"
                 />
-                <ButtonStyled type="submit" disabled={isLoading}>
+                <ButtonStyled type="submit" disabled={isLoading}  data-test="signup-btn">
                     {
                         isLoading 
                         ? (<ThreeDots 
@@ -92,7 +96,7 @@ export default function RegisterPage() {
 
                 </ButtonStyled>
             </FormStyled>
-            <StyledLink to="/">
+            <StyledLink to="/" data-test="login-link">
                 Já tem uma conta? Faça login!
             </StyledLink>
         </PageContainer>

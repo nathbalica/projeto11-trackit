@@ -4,7 +4,7 @@ import trackit from "../../assets/TrackIt.png"
 import useAuth from "../../hooks/auth";
 
 export default function Header() {
-    const { userAuth }  = useAuth();
+    const { userAuth } = useAuth();
     const location = useLocation();
 
     const hideHeader = location.pathname === "/" || location.pathname === "/cadastro";
@@ -13,9 +13,9 @@ export default function Header() {
     }
 
     return (
-        <ContainerHeader>
-            <img src={trackit}/>
-            {userAuth && <User src={userAuth.image} alt={userAuth.name} />}
+        <ContainerHeader data-test="header">
+            <img src={trackit} alt="TrackIt" />
+            {userAuth && <User src={userAuth.image} alt={userAuth.name} data-test="avatar"/>}
         </ContainerHeader>
     )
 }
@@ -38,7 +38,7 @@ const ContainerHeader = styled.div`
 `
 
 
-const User = styled.img `
+const User = styled.img`
     width: 50px;
     height: 50px;
     border-radius: 50%; 
