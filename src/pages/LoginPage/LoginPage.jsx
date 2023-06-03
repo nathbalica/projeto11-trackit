@@ -2,7 +2,7 @@
 import logo from "../../assets/logo.png"
 import { PageContainer, ButtonStyled, FormStyled, Input, StyledLink } from "../../components/InicialPages/exportPages.jsx"
 import axios from "axios";
-import { BASE_URL } from "../../constants/apis";
+import { BASE_URL } from "../../utils/constants/apis";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"
 import { ThreeDots } from "react-loader-spinner"

@@ -3,9 +3,11 @@ import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import useProgress from "../../hooks/progress";
 
-export default function Footer(){
+export default function Footer() {
     const location = useLocation()
+    const { progress } = useProgress();
 
     const hideHeader = location.pathname === "/" || location.pathname === "/cadastro";
     if (hideHeader) {
@@ -13,21 +15,22 @@ export default function Footer(){
     }
 
     return (
-        <ContainerFooter  data-test="menu">
+        <ContainerFooter data-test="menu">
             <StyledLink to="/habitos" data-test="habit-link" >Hábitos</StyledLink>
             <ContainerProgressBar>
                 <CircleProgressBar>
                     <Link to="/hoje" data-test="today-link">
-                        <CircularProgressbar 
-                            value={60}
+                        <CircularProgressbar
+                            value={progress}
                             text={"Hoje"}
                             background
                             backgroundPadding={6}
                             styles={buildStyles({
-                            backgroundColor: "#3e98c7",
-                            textColor: "#fff",
-                            pathColor: "#fff",
-                            trailColor: "transparent"})}
+                                backgroundColor: "#3e98c7",
+                                textColor: "#fff",
+                                pathColor: "#fff",
+                                trailColor: "transparent"
+                            })}
                         />
                     </Link>
                 </CircleProgressBar>
@@ -37,7 +40,7 @@ export default function Footer(){
     )
 }
 
-const ContainerFooter = styled.div `
+const ContainerFooter = styled.div`
     width: 100%;
     height: 70px;
 
@@ -51,13 +54,13 @@ const ContainerFooter = styled.div `
     align-items: center;
     z-index: 1;
 `
-const ContainerProgressBar = styled.div `
+const ContainerProgressBar = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
 `
-const CircleProgressBar = styled.div `
+const CircleProgressBar = styled.div`
     width: 90px;
     height: 90px;
 

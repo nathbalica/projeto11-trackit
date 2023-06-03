@@ -2,7 +2,7 @@ import styled from "styled-components"
 import daysOfWeek from "../../../utils/daysOfWeek"
 import { useState, useEffect } from "react"
 import useAuth from "../../../hooks/auth"
-import { BASE_URL } from "../../../constants/apis"
+import { BASE_URL } from "../../../utils/constants/apis"
 import axios from "axios"
 import { ThreeDots } from "react-loader-spinner"
 

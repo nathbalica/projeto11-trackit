@@ -4,33 +4,50 @@ import FormHabits from "./FormHabits/FormHabits";
 import { useState, useEffect } from "react";
 import useAuth from "../../hooks/auth";
 import styled from "styled-components";
-import apis from "../../constants/apis";
+import apis from "../../utils/constants/apis";
 import daysOfWeek from "../../utils/daysOfWeek";
 import { FaTrash } from 'react-icons/fa';
-import { BASE_URL } from "../../constants/apis";
+import { BASE_URL } from "../../utils/constants/apis";
 import axios from "axios";
 import ReactModal from 'react-modal';
+import useProgress from "../../hooks/progress";
 
 ReactModal.setAppElement('#root');
 
 export default function HabitsPage() {
     const [createHabit, setCreateHabit] = useState(false)
     const [habits, setHabits] = useState(null)
-    const [deleteConfirmation, setDeleteConfirmation] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [habitToDelete, setHabitToDelete] = useState(null);
     const { userAuth } = useAuth();
+    const { updateProgress } = useProgress();
 
     function handleListHabits() {
         apis.listHabits(userAuth.token)
             .then(res => {
                 setHabits(res.data)
+                handleListHabitsToday()
                 console.log(res.data)
             })
             .catch(error => {
                 console.log(error.response);
             })
     }
+
+    function handleListHabitsToday(){
+        apis.lisHabitsToday(userAuth.token)
+        .then(res => {
+            console.log(res)
+            setHabitsToday(res.data);
+            const habitsDone = res.data.filter(habit => habit.done)
+            updateProgress(habitsDone.length, res.data.length);
+        })
+        .catch(error => {
+            console.log(error.response);
+        })
+    }
+
+    
 
     function handleDeleteHabits(habitId) {
         setHabitToDelete(habitId);
@@ -47,6 +64,8 @@ export default function HabitsPage() {
         axios.delete(`${BASE_URL}/habits/${habitToDelete}`, config)
             .then((response) => {
                 console.log('Hábito excluído com sucesso');
+                handleListHabits()
+                handleListHabitsToday()
                 setHabits((prevHabits) =>
                     prevHabits.filter((habit) => habit.id !== habitToDelete)
                 );
@@ -77,12 +96,6 @@ export default function HabitsPage() {
         }));
     };
 
-    // function confirmDelete() {
-    //     // Lógica para excluir o hábito
-    //     setIsModalOpen(false);
-    //     setDeleteConfirmation(null);
-    //     setHabitToDelete(null);
-    // }
 
     function cancelDelete() {
         setIsModalOpen(false);
