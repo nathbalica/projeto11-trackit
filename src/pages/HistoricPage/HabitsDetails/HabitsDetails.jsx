@@ -5,7 +5,7 @@ export default function HabitsDetails({ habits, onClose }) {
   return (
     <Overlay>
       <DetailsContainer>
-        <CloseButton onClick={onClose}>Fechar</CloseButton>
+        
         <HabitsList>
           {habits.map(habit => (
             <HabitItem key={habit.id}>
@@ -14,6 +14,8 @@ export default function HabitsDetails({ habits, onClose }) {
             </HabitItem>
           ))}
         </HabitsList>
+        <div></div>
+        <CloseButton onClick={onClose}>Fechar</CloseButton>
       </DetailsContainer>
     </Overlay>
   );
@@ -40,18 +42,19 @@ const DetailsContainer = styled.div`
   max-height: 90%;
   min-height: 25%;
   overflow: auto;
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Adicionado */
 `;
 
 const CloseButton = styled.button`
-   position: absolute;
-   bottom: 0;
-   right: 20px;
+
   background-color: #52B6FF;
   border: 2px solid #126BA5;;
   border-radius: 5px;
   padding: 5px 10px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
+  align-self: flex-end;
   cursor: pointer;
 `;
 
