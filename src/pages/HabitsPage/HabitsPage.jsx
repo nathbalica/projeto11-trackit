@@ -22,10 +22,9 @@ export default function HabitsPage() {
     const { userAuth } = useAuth();
     const { updateProgress } = useProgress();
 
-    console.log(userAuth.token)
 
     function handleListHabits() {
-        apis.listHabits(userAuth.token)
+        apis.listHabits(userAuth?.token)
             .then(res => {
                 setHabits(res.data)
                 handleListHabitsToday()
@@ -37,7 +36,7 @@ export default function HabitsPage() {
     }
 
     function handleListHabitsToday(){
-        apis.lisHabitsToday(userAuth.token)
+        apis.lisHabitsToday(userAuth?.token)
         .then(res => {
             console.log(res.data)
             setHabitsToday(res.data);
@@ -57,7 +56,7 @@ export default function HabitsPage() {
     function confirmDelete() {
         const config = {
             headers: {
-                Authorization: `Bearer ${userAuth.token}`,
+                Authorization: `Bearer ${userAuth?.token}`,
             },
         };
 

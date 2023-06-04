@@ -18,7 +18,7 @@ export default function LoginPage() {
 
 
     useEffect(() => {
-        if (userAuth && userAuth.token) {
+        if (userAuth && userAuth?.token) {
           navigate("/hoje");
         }
       }, []);

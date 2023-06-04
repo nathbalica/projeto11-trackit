@@ -2,7 +2,6 @@ import styled from "styled-components";
 import check from "../../../assets/check.svg"
 import useAuth from "../../../hooks/auth";
 import apis from "../../../utils/constants/apis";
-import { useState } from "react";
 
 export default function HabitsToday({ id,
     name,
@@ -18,7 +17,7 @@ export default function HabitsToday({ id,
     function toggleHabitDone() {
           if (done) {
             apis
-              .checkDisable(id, userAuth.token)
+              .checkDisable(id, userAuth?.token)
               .then((res) => {
                 console.log("Habit unmarked:", res.data);
               })
@@ -30,7 +29,7 @@ export default function HabitsToday({ id,
               });
           } else {
             apis
-              .checkEnable(id, userAuth.token)
+              .checkEnable(id, userAuth?.token)
               .then((res) => {
                 console.log("Habit marked as done:", res.data);
               })

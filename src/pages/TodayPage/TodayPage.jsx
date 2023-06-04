@@ -20,7 +20,7 @@ export default function TodayPage(){
     
 
     function handleListHabitsToday(){
-        apis.lisHabitsToday(userAuth.token)
+        apis.lisHabitsToday(userAuth?.token)
         .then(res => {
             setHabitsToday(res.data)
             console.log(res.data)

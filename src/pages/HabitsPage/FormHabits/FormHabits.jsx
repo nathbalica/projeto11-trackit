@@ -40,7 +40,7 @@ export default function FormHabits({ formClose, formOpen, loadHabits }) {
 
         const config = {
             headers: {
-                Authorization: `Bearer ${userAuth.token}`,
+                Authorization: `Bearer ${userAuth?.token}`,
             },
         };
         console.log(habitData)

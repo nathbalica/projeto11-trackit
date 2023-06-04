@@ -32,7 +32,7 @@ export default function Historic() {
   }, []);
 
   function handleListHabitsHistoric() {
-    apis.getHistory(userAuth.token)
+    apis.getHistory(userAuth?.token)
       .then(res => {
         console.log(res.data)
         setHistoric(res.data)
@@ -44,7 +44,7 @@ export default function Historic() {
 
 
   function handleListHabitsToday() {
-    apis.lisHabitsToday(userAuth.token)
+    apis.lisHabitsToday(userAuth?.token)
       .then(res => {
         const habitsDoneApi = res.data.filter(habit => habit.done)
         updateProgress(habitsDoneApi.length, res.data.length);
