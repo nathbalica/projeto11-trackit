@@ -26,12 +26,12 @@ export default function FormHabits({ formClose, formOpen, loadHabits }) {
         e.preventDefault()
 
         if(selectedDays.length === 0){
-            alert("Slecione pelo menos um dia da semana.")
+            alert("Selecione pelo menos um dia da semana.")
             return;
         }
 
         if(habitName === ""){
-            alert("Adicione um hábito")
+            alert("Por favor, preencha o campo com o nome do habito!")
             return;
         }
 
@@ -43,16 +43,11 @@ export default function FormHabits({ formClose, formOpen, loadHabits }) {
             days: selectedDays,
         };
 
-
-
         const config = {
             headers: {
                 Authorization: `Bearer ${userAuth?.token}`,
             },
         };
-        console.log(habitData)
-
-        console.log("config ->", config)
 
         axios.post(`${BASE_URL}/habits`, habitData, config)
             .then((res) => {
@@ -83,7 +78,6 @@ export default function FormHabits({ formClose, formOpen, loadHabits }) {
                     value={habitName}
                     onChange={(e) => setHabitName(e.target.value)}
                     disabled={isLoading}
-                    required
                     data-test="habit-name-input"
                 />
                 <DaysContainer disabled={isLoading}>
