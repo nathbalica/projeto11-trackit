@@ -54,6 +54,11 @@ export default function HabitsPage() {
     }
 
     function confirmDelete() {
+        const shouldDelete = window.confirm('Deseja realmente excluir este hábito?');
+        if (!shouldDelete) {
+            return; // Se o usuário clicar em "Cancelar", não faz nada
+        }
+
         const config = {
             headers: {
                 Authorization: `Bearer ${userAuth?.token}`,
@@ -61,23 +66,23 @@ export default function HabitsPage() {
         };
 
         axios.delete(`${BASE_URL}/habits/${habitToDelete}`, config)
-            .then((response) => {
-                console.log('Hábito excluído com sucesso');
-                handleListHabits()
-                handleListHabitsToday()
-                setHabits((prevHabits) =>
-                    prevHabits.filter((habit) => habit.id !== habitToDelete)
-                );
-                setIsModalOpen(false);
-                setHabitToDelete(null);
+        .then((response) => {
+            console.log('Hábito excluído com sucesso');
+            handleListHabits();
+            handleListHabitsToday();
+            setHabits((prevHabits) =>
+                prevHabits.filter((habit) => habit.id !== habitToDelete)
+            );
+            setIsModalOpen(false);
+            setHabitToDelete(null);
 
-            })
-            .catch((error) => {
-                console.error('Erro ao excluir hábito:', error);
-                // Trate o erro de acordo com a sua necessidade
-                setIsModalOpen(false);
-                setHabitToDelete(null);
-            })
+        })
+        .catch((error) => {
+            console.error('Erro ao excluir hábito:', error);
+            // Trate o erro de acordo com a sua necessidade
+            setIsModalOpen(false);
+            setHabitToDelete(null);
+        })
     }
 
 
