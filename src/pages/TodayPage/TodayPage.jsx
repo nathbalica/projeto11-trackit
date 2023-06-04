@@ -45,8 +45,8 @@ export default function TodayPage(){
     return (
         <Container>
             <Content>
-                <Title>{formattedDate}</Title>
-                <Subtitle>
+                <Title data-test="today">{formattedDate}</Title>
+                <Subtitle data-test="today-counter" >
                     {
                         doneHabits === 0
                         ? "Nenhum hábito concluído ainda"

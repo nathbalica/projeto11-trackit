@@ -53,22 +53,22 @@ export default function HabitsToday({ id,
       
     
     return (
-        <Habits>
+        <Habits data-test="today-habit-container">
             <HabitsSequence>
-                <TitleSequence>{name}</TitleSequence>
-                <SubtitleSequence>Sequência atual:
+                <TitleSequence data-test="today-habit-name">{name}</TitleSequence>
+                <SubtitleSequence  data-test="today-habit-sequence">Sequência atual:
                     <CurrentSequence done={done}>
                         {currentSequence} {formatDaysString(currentSequence)}
                     </CurrentSequence>
                 </SubtitleSequence>
-                <SubtitleSequence>Seu recorde:
+                <SubtitleSequence data-test="today-habit-record">Seu recorde:
                     <HighestSequence currentSequenceIsHighest={currentSequenceIsHighest}>
                         {highestSequence} {formatDaysString(highestSequence)}
                     </HighestSequence>
 
                 </SubtitleSequence>
             </HabitsSequence>
-            <HabitsTodayCheck done={done} onClick={toggleHabitDone}>
+            <HabitsTodayCheck data-test="today-habit-check-btn" done={done} onClick={toggleHabitDone}>
                 <img src={check} alt="check.svg" />
             </HabitsTodayCheck>
         </Habits>

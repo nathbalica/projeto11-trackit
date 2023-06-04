@@ -117,10 +117,9 @@ export default function Historic() {
     <ContainerHistoric>
       <ContentHistoric>
         <TitleHabits>Histórico</TitleHabits>
-        {/* <Legend>Em breve você poderá ver o histórico dos seus hábitos aqui!</Legend> */}
 
       </ContentHistoric>
-      <CalendarHistoric>
+      <CalendarHistoric data-test="calendar">
         <StyledCalendar
           onChange={onChange}
           value={value}
