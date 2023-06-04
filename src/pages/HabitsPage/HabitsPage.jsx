@@ -22,12 +22,14 @@ export default function HabitsPage() {
     const { userAuth } = useAuth();
     const { updateProgress } = useProgress();
 
+    console.log(userAuth.token)
+
     function handleListHabits() {
         apis.listHabits(userAuth.token)
             .then(res => {
                 setHabits(res.data)
                 handleListHabitsToday()
-                console.log(res.data)
+                // console.log(res.data)
             })
             .catch(error => {
                 console.log(error.response);
@@ -37,7 +39,7 @@ export default function HabitsPage() {
     function handleListHabitsToday(){
         apis.lisHabitsToday(userAuth.token)
         .then(res => {
-            console.log(res)
+            console.log(res.data)
             setHabitsToday(res.data);
             const habitsDone = res.data.filter(habit => habit.done)
             updateProgress(habitsDone.length, res.data.length);
@@ -46,8 +48,6 @@ export default function HabitsPage() {
             console.log(error.response);
         })
     }
-
-    
 
     function handleDeleteHabits(habitId) {
         setHabitToDelete(habitId);
@@ -84,6 +84,7 @@ export default function HabitsPage() {
 
 
     useEffect(handleListHabits, []);
+    useEffect(handleListHabitsToday, []);
 
     if (habits === null) {
         return <h1>Carregando...</h1>;
@@ -113,7 +114,7 @@ export default function HabitsPage() {
             <FormHabits
                 formClose={() => setCreateHabit(false)}
                 formOpen={createHabit}
-                handleListHabits={handleListHabits}
+                // handleListHabits={handleListHabits}
                 loadHabits={handleListHabits}
             />
 

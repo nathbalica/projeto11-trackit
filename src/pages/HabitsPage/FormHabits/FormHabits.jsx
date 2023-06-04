@@ -43,6 +43,9 @@ export default function FormHabits({ formClose, formOpen, loadHabits }) {
                 Authorization: `Bearer ${userAuth.token}`,
             },
         };
+        console.log(habitData)
+
+        console.log("config ->", config)
 
         axios.post(`${BASE_URL}/habits`, habitData, config)
             .then((res) => {
@@ -50,7 +53,7 @@ export default function FormHabits({ formClose, formOpen, loadHabits }) {
                 setHabitName("")
                 setSelectedDays([])
                 loadHabits()
-                formClose();
+                formClose();        
             })
             .catch((error) => {
                 setIsLoading(false);

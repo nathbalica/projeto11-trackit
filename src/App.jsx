@@ -9,6 +9,7 @@ import { AuthContextProvider } from "./contexts/AuthContext";
 import TodayPage from "./pages/TodayPage/TodayPage";
 import Footer from "./components/Footer/Footer";
 import { ProgressContextProvider } from "./contexts/ProgressContext"
+import Historic from "./pages/HistoricPage/HistoricPage";
 
 
 
@@ -25,6 +26,7 @@ export default function App() {
                         <Route path='/cadastro' element={<RegisterPage />} />
                         <Route path='/hoje' element={<TodayPage />} />
                         <Route path='/habitos' element={<HabitsPage />} />
+                        <Route path='/historico' element={<Historic />} />
                     </Routes>
                     <Footer />
                 </BrowserRouter>

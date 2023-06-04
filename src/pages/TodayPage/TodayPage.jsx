@@ -17,6 +17,8 @@ export default function TodayPage(){
     const { userAuth } = useAuth();
     const { progress, updateProgress } = useProgress();
 
+    
+
     function handleListHabitsToday(){
         apis.lisHabitsToday(userAuth.token)
         .then(res => {

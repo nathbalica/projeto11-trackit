@@ -83,7 +83,6 @@ const Habits = styled.div`
     border-radius: 5px;
     padding: 18px;
     margin: 20px auto;
-    flex-wrap: wrap;
     display: flex;
     justify-content: space-between;
 `
@@ -92,6 +91,7 @@ const HabitsSequence = styled.div`
     color: #666666;
     font-style: normal;
     font-weight: 400;
+    flex-wrap: wrap;
 `
 
 const TitleSequence = styled.h1`

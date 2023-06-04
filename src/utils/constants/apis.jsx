@@ -48,12 +48,19 @@ function checkDisable(habitId, token) {
     return req;
 }
 
+function getHistory(token){
+    const config = configToken(token)
+    const req = axios.get(`${BASE_URL}/habits/history/daily`, config)
+    return req;
+}
+
 const apis = {
     createHabits,
     listHabits,
     lisHabitsToday,
     checkEnable,
-    checkDisable
+    checkDisable,
+    getHistory
 }
 
 export default apis;

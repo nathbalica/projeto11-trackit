@@ -35,7 +35,7 @@ export default function Footer() {
                     </Link>
                 </CircleProgressBar>
             </ContainerProgressBar>
-            <StyledLink data-test="history-link">Histórico</StyledLink>
+            <StyledLink data-test="history-link" to="/historico">Histórico</StyledLink>
         </ContainerFooter>
     )
 }
