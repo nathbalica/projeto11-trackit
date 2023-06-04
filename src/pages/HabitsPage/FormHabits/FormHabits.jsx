@@ -30,6 +30,11 @@ export default function FormHabits({ formClose, formOpen, loadHabits }) {
             return;
         }
 
+        if(habitName === ""){
+            alert("Adicione um hábito")
+            return;
+        }
+
         setIsLoading(true);
         setError(null);
 
@@ -37,6 +42,8 @@ export default function FormHabits({ formClose, formOpen, loadHabits }) {
             name: habitName,
             days: selectedDays,
         };
+
+
 
         const config = {
             headers: {
@@ -87,6 +94,7 @@ export default function FormHabits({ formClose, formOpen, loadHabits }) {
                             selected={selectedDays.includes(day.id)}
                             onClick={() => handleDayClick(day.id)}
                             data-test="habit-day"
+                            disabled={isLoading}
                         >
                             {day.day}
                         </DayButton>
