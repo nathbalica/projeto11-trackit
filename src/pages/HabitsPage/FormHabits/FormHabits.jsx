@@ -50,24 +50,21 @@ export default function FormHabits({ formClose, formOpen, loadHabits }) {
             },
         };
 
-        setTimeout(() => {
-            axios
-              .post(`${BASE_URL}/habits`, habitData, config)
-              .then((res) => {
+        axios.post(`${BASE_URL}/habits`, habitData, config)
+            .then((res) => {
                 setIsLoading(false);
-                setHabitName("");
-                setSelectedDays([]);
-                loadHabits();
-                formClose();
-              })
-              .catch((error) => {
+                setHabitName("")
+                setSelectedDays([])
+                loadHabits()
+                formClose();        
+            })
+            .catch((error) => {
                 setIsLoading(false);
                 console.error("Erro ao cadastrar hábito:", error);
                 setError("Erro ao cadastrar hábito. Por favor, tente novamente.");
-              });
-          }, 100);
-    }
+            });
 
+    };
 
     useEffect(() => {
         setError(null);
