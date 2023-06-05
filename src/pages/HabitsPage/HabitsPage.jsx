@@ -15,6 +15,7 @@ import useProgress from "../../hooks/progress";
 export default function HabitsPage() {
     const [createHabit, setCreateHabit] = useState(false)
     const [habits, setHabits] = useState(null)
+    const [confirmDeleteHabit, setConfirmDeleteHabit] = useState();
     const { userAuth } = useAuth();
     const { updateProgress } = useProgress();
 
@@ -42,10 +43,10 @@ export default function HabitsPage() {
     }
 
     function handleDeleteHabits(habitId) {
-        const shouldDelete = window.confirm('Deseja realmente excluir este hábito?');
-        if (!shouldDelete) {
-            return; // Se o usuário clicar em "Cancelar", não faz nada
-        }
+        // const shouldDelete = window.confirm('Deseja realmente excluir este hábito?');
+        // if (!shouldDelete) {
+        //     return; // Se o usuário clicar em "Cancelar", não faz nada
+        // }
 
         const config = {
             headers: {
@@ -65,6 +66,16 @@ export default function HabitsPage() {
 
     useEffect(handleListHabits, []);
 
+    const handleConfirmDelete = (habitId) => {
+        if (habitId) {
+            handleDeleteHabits(habitId);
+            setConfirmDeleteHabit(null);
+        }
+    };
+
+    const handleCancelDelete = () => {
+        setConfirmDeleteHabit(null);
+      };
 
     if (habits === null) {
         return <h1>Carregando...</h1>;
@@ -92,6 +103,18 @@ export default function HabitsPage() {
                 loadHabits={handleListHabits}
             />
 
+            {confirmDeleteHabit && (
+                <ConfirmOverlay>
+                    <ConfirmContent>
+                        <ConfirmTitle>Deseja realmente excluir este hábito?</ConfirmTitle>
+                        <ButtonsConfirm>
+                            <button onClick={() => handleConfirmDelete(confirmDeleteHabit)}>Excluir</button>
+                            <button onClick={handleCancelDelete}>Cancelar</button>
+                        </ButtonsConfirm>
+                    </ConfirmContent>
+                </ConfirmOverlay>
+            )}
+
             {habits.length === 0 ? (
                 <Legend>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</Legend>
             ) : (
@@ -105,14 +128,14 @@ export default function HabitsPage() {
                                 ))}
                             </HabitDays>
                         </Habits>
-                        <DeleteButton onClick={() => handleDeleteHabits(habit.id)} data-test="habit-delete-btn">
+                        <DeleteButton onClick={() => setConfirmDeleteHabit(habit.id)} data-test="habit-delete-btn">
                             <FaTrash />
                         </DeleteButton>
                     </ContainerEachHabit>
                 ))
             )}
 
-            
+
 
         </ContainerHabits>
     )
