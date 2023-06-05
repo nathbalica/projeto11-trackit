@@ -65,7 +65,7 @@ export default function FormHabits({ formClose, formOpen, loadHabits }) {
                 console.error("Erro ao cadastrar hábito:", error);
                 setError("Erro ao cadastrar hábito. Por favor, tente novamente.");
               });
-          }, 1000);
+          }, 500);
     }
 
 
