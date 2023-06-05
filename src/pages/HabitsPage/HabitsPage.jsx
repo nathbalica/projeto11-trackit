@@ -9,19 +9,14 @@ import daysOfWeek from "../../utils/daysOfWeek";
 import { FaTrash } from 'react-icons/fa';
 import { BASE_URL } from "../../utils/constants/apis";
 import axios from "axios";
-import ReactModal from 'react-modal';
 import useProgress from "../../hooks/progress";
 
-ReactModal.setAppElement('#root');
 
 export default function HabitsPage() {
     const [createHabit, setCreateHabit] = useState(false)
     const [habits, setHabits] = useState(null)
-    // const [isModalOpen, setIsModalOpen] = useState(false);
-    // const [habitToDelete, setHabitToDelete] = useState(null);
     const { userAuth } = useAuth();
     const { updateProgress } = useProgress();
-
 
     function handleListHabits() {
         apis.listHabits(userAuth?.token)
@@ -35,21 +30,16 @@ export default function HabitsPage() {
             })
     }
 
-    function handleListHabitsToday(){
+    function handleListHabitsToday() {
         apis.lisHabitsToday(userAuth?.token)
-        .then(res => {
-            const habitsDone = res.data.filter(habit => habit.done)
-            updateProgress(habitsDone.length, res.data.length);
-        })
-        .catch(error => {
-            console.log(error.response);
-        })
+            .then(res => {
+                const habitsDone = res.data.filter(habit => habit.done)
+                updateProgress(habitsDone.length, res.data.length);
+            })
+            .catch(error => {
+                console.log(error.response);
+            })
     }
-
-    // function handleDeleteHabits(habitId) {
-    //     setHabitToDelete(habitId);
-    //     setIsModalOpen(true);
-    // }
 
     function handleDeleteHabits(habitId) {
         const shouldDelete = window.confirm('Deseja realmente excluir este hábito?');
@@ -63,25 +53,14 @@ export default function HabitsPage() {
             },
         };
         axios.delete(`${BASE_URL}/habits/${habitId}`, config)
-        .then((response) => {
-            console.log('Hábito excluído com sucesso');
-            handleListHabits();
-            handleListHabitsToday();
-            // setHabits((prevHabits) =>
-            //     prevHabits.filter((habit) => habit.id !== habitToDelete)
-            // );
-            // setIsModalOpen(false);
-            // setHabitToDelete(null);
+            .then((response) => {
+                console.log('Hábito excluído com sucesso');
+                handleListHabits();
+                handleListHabitsToday();
 
-        })
-        // .catch((error) => {
-        //     console.error('Erro ao excluir hábito:', error);
-        //     // Trate o erro de acordo com a sua necessidade
-        //     setIsModalOpen(false);
-        //     setHabitToDelete(null);
-        // })
+
+            })
     }
-
 
 
     useEffect(handleListHabits, []);
@@ -99,11 +78,6 @@ export default function HabitsPage() {
     };
 
 
-    function cancelDelete() {
-        setIsModalOpen(false);
-        setHabitToDelete(null);
-    }
-
     return (
         <ContainerHabits>
             <ContentHabits>
@@ -115,7 +89,6 @@ export default function HabitsPage() {
             <FormHabits
                 formClose={() => setCreateHabit(false)}
                 formOpen={createHabit}
-                // handleListHabits={handleListHabits}
                 loadHabits={handleListHabits}
             />
 
@@ -139,43 +112,36 @@ export default function HabitsPage() {
                 ))
             )}
 
-            {/* {habitToDelete && (
-                <ReactModal
-                    isOpen={isModalOpen}
-                    onRequestClose={cancelDelete}
-                    style={customModalStyles}
-                    contentLabel="Confirmar exclusão"
-                >
-                    <ConfirmTitle>Tem certeza de que deseja excluir este hábito?</ConfirmTitle>
-                    <ButtonsConfirm>
-                        <button onClick={confirmDelete}>Excluir</button>
-                        <button onClick={cancelDelete}>Cancelar</button>
-                    </ButtonsConfirm>
-                </ReactModal>
-            )} */}
+            
+
         </ContainerHabits>
     )
 }
 
-const customModalStyles = {
-    overlay: {
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
-        zIndex: 1000,
-    },
-    content: {
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        maxWidth: '400px',
-        width: '90%',
-        height: '150px',
-        padding: '20px',
-        borderRadius: '5px',
-        backgroundColor: '#ffffff',
-        boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)',
-    },
-};
+const ConfirmOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const ConfirmContent = styled.div`
+  position: relative;
+  max-width: 400px;
+  width: 90%;
+  height: 150px;
+  padding: 20px;
+  border-radius: 5px;
+  background-color: #ffffff;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+`;
+
 
 const ConfirmTitle = styled.p`
     margin-bottom: 50px;
