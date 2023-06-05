@@ -17,8 +17,8 @@ ReactModal.setAppElement('#root');
 export default function HabitsPage() {
     const [createHabit, setCreateHabit] = useState(false)
     const [habits, setHabits] = useState(null)
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [habitToDelete, setHabitToDelete] = useState(null);
+    // const [isModalOpen, setIsModalOpen] = useState(false);
+    // const [habitToDelete, setHabitToDelete] = useState(null);
     const { userAuth } = useAuth();
     const { updateProgress } = useProgress();
 
@@ -38,8 +38,6 @@ export default function HabitsPage() {
     function handleListHabitsToday(){
         apis.lisHabitsToday(userAuth?.token)
         .then(res => {
-            console.log(res.data)
-            setHabitsToday(res.data);
             const habitsDone = res.data.filter(habit => habit.done)
             updateProgress(habitsDone.length, res.data.length);
         })
@@ -48,12 +46,12 @@ export default function HabitsPage() {
         })
     }
 
-    function handleDeleteHabits(habitId) {
-        setHabitToDelete(habitId);
-        setIsModalOpen(true);
-    }
+    // function handleDeleteHabits(habitId) {
+    //     setHabitToDelete(habitId);
+    //     setIsModalOpen(true);
+    // }
 
-    function confirmDelete() {
+    function handleDeleteHabits(habitId) {
         const shouldDelete = window.confirm('Deseja realmente excluir este hábito?');
         if (!shouldDelete) {
             return; // Se o usuário clicar em "Cancelar", não faz nada
@@ -64,31 +62,30 @@ export default function HabitsPage() {
                 Authorization: `Bearer ${userAuth?.token}`,
             },
         };
-
-        axios.delete(`${BASE_URL}/habits/${habitToDelete}`, config)
+        axios.delete(`${BASE_URL}/habits/${habitId}`, config)
         .then((response) => {
             console.log('Hábito excluído com sucesso');
             handleListHabits();
             handleListHabitsToday();
-            setHabits((prevHabits) =>
-                prevHabits.filter((habit) => habit.id !== habitToDelete)
-            );
-            setIsModalOpen(false);
-            setHabitToDelete(null);
+            // setHabits((prevHabits) =>
+            //     prevHabits.filter((habit) => habit.id !== habitToDelete)
+            // );
+            // setIsModalOpen(false);
+            // setHabitToDelete(null);
 
         })
-        .catch((error) => {
-            console.error('Erro ao excluir hábito:', error);
-            // Trate o erro de acordo com a sua necessidade
-            setIsModalOpen(false);
-            setHabitToDelete(null);
-        })
+        // .catch((error) => {
+        //     console.error('Erro ao excluir hábito:', error);
+        //     // Trate o erro de acordo com a sua necessidade
+        //     setIsModalOpen(false);
+        //     setHabitToDelete(null);
+        // })
     }
 
 
 
     useEffect(handleListHabits, []);
-    useEffect(handleListHabitsToday, []);
+
 
     if (habits === null) {
         return <h1>Carregando...</h1>;
@@ -111,7 +108,7 @@ export default function HabitsPage() {
         <ContainerHabits>
             <ContentHabits>
                 <TitleHabits>Meus hábitos</TitleHabits>
-                <ButtonHabits onClick={() => setCreateHabit(true)} data-test="habit-create-btn">
+                <ButtonHabits data-test="habit-create-btn" onClick={() => setCreateHabit(true)} >
                     <img src={plus} />
                 </ButtonHabits>
             </ContentHabits>
@@ -142,7 +139,7 @@ export default function HabitsPage() {
                 ))
             )}
 
-            {habitToDelete && (
+            {/* {habitToDelete && (
                 <ReactModal
                     isOpen={isModalOpen}
                     onRequestClose={cancelDelete}
@@ -155,7 +152,7 @@ export default function HabitsPage() {
                         <button onClick={cancelDelete}>Cancelar</button>
                     </ButtonsConfirm>
                 </ReactModal>
-            )}
+            )} */}
         </ContainerHabits>
     )
 }

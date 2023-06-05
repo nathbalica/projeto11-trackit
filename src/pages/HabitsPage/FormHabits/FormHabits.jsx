@@ -15,7 +15,7 @@ export default function FormHabits({ formClose, formOpen, loadHabits }) {
 
 
 
-    const handleDayClick = (dayId) => {
+    function handleDayClick(dayId){
         if (selectedDays.includes(dayId)) {
             setSelectedDays(selectedDays.filter((selectedDay) => selectedDay !== dayId));
         } else {
@@ -23,7 +23,7 @@ export default function FormHabits({ formClose, formOpen, loadHabits }) {
         }
     };
 
-    const handleInputChange = (e) => {
+    function handleInputChange(e){
         e.preventDefault()
 
         if(selectedDays.length === 0){
@@ -72,14 +72,14 @@ export default function FormHabits({ formClose, formOpen, loadHabits }) {
 
 
     return (
-        <FormContainer onSubmit={handleInputChange} formOpen={formOpen}error={error}  data-test="habit-create-container">
+        <FormContainer data-test="habit-create-container" onSubmit={handleInputChange} formOpen={formOpen}error={error}  >
             <Container>
                 <Input
+                    data-test="habit-name-input"
                     placeholder="nome do hábito"
                     value={habitName}
                     onChange={(e) => setHabitName(e.target.value)}
                     disabled={isLoading}
-                    data-test="habit-name-input"
                 />
                 <DaysContainer disabled={isLoading}>
                     {daysOfWeek.map((day) => (
