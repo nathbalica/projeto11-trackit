@@ -16,7 +16,6 @@ export default function Historic() {
   const [showDetails, setShowDetails] = useState(false);
   const [selectedHabits, setSelectedHabits] = useState([]);
 
-  const currentDate = dayjs();
   const [value, onChange] = useState(new Date());
 
 
@@ -44,7 +43,7 @@ export default function Historic() {
 
 
   function handleListHabitsToday() {
-    apis.lisHabitsToday(userAuth?.token)
+    apis.lisHabitsToday(userAuth.token)
       .then(res => {
         const habitsDoneApi = res.data.filter(habit => habit.done)
         updateProgress(habitsDoneApi.length, res.data.length);

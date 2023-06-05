@@ -14,12 +14,11 @@ export default function LoginPage() {
 
     const navigate = useNavigate()
     const { userAuth, login } = useAuth();
-    console.log(userAuth.token)
 
 
     useEffect(() => {
-        if (userAuth && userAuth?.token) {
-          navigate("/hoje");
+        if (userAuth?.token) { // Usando o operador de coalescência nula para verificar userAuth.token
+            navigate("/hoje");
         }
       }, []);
 
