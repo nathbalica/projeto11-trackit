@@ -14,6 +14,7 @@ export default function FormHabits({ formClose, formOpen, loadHabits }) {
     const { userAuth } = useAuth();
 
 
+
     const handleDayClick = (dayId) => {
         if (selectedDays.includes(dayId)) {
             setSelectedDays(selectedDays.filter((selectedDay) => selectedDay !== dayId));
@@ -155,6 +156,8 @@ const Input = styled.input`
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
+    background-color: ${(props) => props.disabled ? "#F2F2F2" : "#FFFFFF"};
+    color: ${(props) => props.disabled ? "#AFAFAF" : "#666666"};
     pointer-events: ${(props) => props.disabled ? "none" : "all"};
     opacity: ${(props) => props.disabled ? 0.7 : 1};
 
@@ -168,6 +171,8 @@ const DaysContainer = styled.div`
     display: flex;
     justify-content: space-between;
     margin-top: 8px;
+    pointer-events: ${(props) => props.disabled ? "none" : "all"};
+    opacity: ${(props) => props.disabled ? 0.7 : 1};
 `
 
 const DayButton = styled.button`
@@ -178,6 +183,8 @@ const DayButton = styled.button`
   padding: 8px 12px;
   cursor: pointer;
   border: ${(props) => props.selected ? "1px solid #CFCFCF" : "1px solid #D5D5D5"};
+  pointer-events: ${(props) => props.disabled ? "none" : "all"};
+  opacity: ${(props) => props.disabled ? 0.7 : 1};
 `;
 
 const ButtonContainer = styled.div`
@@ -199,7 +206,7 @@ const CancelButton = styled.button`
   height: 35px;
   font-size: 16px;
   pointer-events: ${(props) => props.disabled ? "none" : "all"};
-opacity: ${(props) => props.disabled ? 0.7 : 1};
+  opacity: ${(props) => props.disabled ? 0.7 : 1};
 
 `;
 
